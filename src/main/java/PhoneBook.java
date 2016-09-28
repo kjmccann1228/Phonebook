@@ -1,5 +1,8 @@
+import java.util.Map.*;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
+import java.util.List;
 /**
  * Created by kurtmccann on 9/28/16.
  */
@@ -20,5 +23,19 @@ public class PhoneBook
     public void remove(String name)
     {
         this.pb.remove(name);
+    }
+
+    public String reverseLookUp(String number)
+    {
+        String toReturn = "Number not found.";
+        for(Entry<String, String> e : pb.entrySet())
+        {
+            if(number.equals(e.getValue()))
+            {
+                toReturn = e.getKey();
+            }
+
+        }
+        return toReturn;
     }
 }

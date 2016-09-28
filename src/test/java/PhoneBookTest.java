@@ -60,4 +60,24 @@ public class PhoneBookTest
         int actual = pb1.pb.size();
         assertEquals(actual, expected);
     }
+
+    @Test
+    public void reverseLookUpTest()
+    {
+        PhoneBook pb1 = new PhoneBook();
+        pb1.pb.put("Bernie Mac", "(999) 999-9999");
+        String expected = "Bernie Mac";
+        String actual = pb1.reverseLookUp("(999) 999-9999");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void reverseLookUpFailTest()
+    {
+        PhoneBook pb1 = new PhoneBook();
+        pb1.pb.put("Bernie Mac", "(999) 999-9999");
+        String actual = pb1.reverseLookUp("Rob Dyrdek");
+        String expected = "Number not found.";
+        assertEquals(expected, actual);
+    }
 }
