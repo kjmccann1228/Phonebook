@@ -1,21 +1,19 @@
+import java.util.*;
 import java.util.Map.*;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.List;
+
 /**
  * Created by kurtmccann on 9/28/16.
  */
 public class PhoneBook
 {
-    protected Map<String, String> pb = new HashMap<>();
+    protected Map<String, List<String>> pb = new TreeMap<>();
 
-    public void add(String name, String number)
+    public void add(String name, List<String> numbers)
     {
-        this.pb.put(name, number);
+        this.pb.put(name, numbers);
     }
 
-    public String lookUp(String name)
+    public List<String> lookUp(String name)
     {
         return pb.get(name);
     }
@@ -25,16 +23,31 @@ public class PhoneBook
         this.pb.remove(name);
     }
 
+    public List<String> listAllEntries()
+    {
+        List<String> entryList = new ArrayList<>();
+        for(String name : this.pb.keySet())
+        {
+            ArrayList<String> nextEntry = new ArrayList<>();
+            nextEntry.add(name);
+            nextEntry.addAll(1, pb.get(name));
+            entryList.add(nextEntry.toString());
+        }
+        return entryList;
+    }
+
     public String reverseLookUp(String number)
     {
         String toReturn = "Number not found.";
-        for(Entry<String, String> e : pb.entrySet())
+        for(Entry<String, List<String>> e : pb.entrySet())
         {
-            if(number.equals(e.getValue()))
+            for(String s : e.getValue())
             {
-                toReturn = e.getKey();
+                if(s.equals(number))
+                {
+                    return e.getKey();
+                }
             }
-
         }
         return toReturn;
     }
