@@ -28,7 +28,7 @@ public class PhoneBook
         List<String> entryList = new ArrayList<>();
         for(String name : this.pb.keySet())
         {
-            ArrayList<String> nextEntry = new ArrayList<>();
+            List<String> nextEntry = new ArrayList<>();
             nextEntry.add(name);
             nextEntry.addAll(1, pb.get(name));
             entryList.add(nextEntry.toString());
